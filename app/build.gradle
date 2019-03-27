@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+    flatDir { dirs 'libs' }
+}
+
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "roborus.com.roborusfacesdk.faceeagsample"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'gun0912.ted:tedpermission:1.0.3'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
+    implementation files('libs/roborusfacesdk.jar')
+}
